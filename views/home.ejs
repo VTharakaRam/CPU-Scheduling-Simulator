@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Scheduling Compiler</title>
+</head>
+<body>
+
+    <div class="container mt-5 text-center">
+        <h1 class="mb-3"> CPU Scheduling Simulator</h1>
+        <pre class="mb-3"> Simulate and visualize CPU scheduling 
+    algorithms with Gantt Charts and metrics.</pre>
+
+        <div>
+            <form id="schedulerForm" method="post" action="/result">
+                <div class="card p-4 shadow">
+
+                    <div class="mb-3">
+                        <label class="form-label"> Select Algorithm </label>
+
+                        <select class="form-select" name="algorithm" id="algorithm">
+                            <option value="fcfs">FCFS</option>
+                            <option value="sjf">SJF</option>
+                            <option value="srtf">SRTF</option>
+                            <option value="priority">Priority</option>
+                            <option value="rr">Round Robin</option>
+                        </select>
+                    </div>
+
+                    <div class="alert alert-info mt-3" id="algorithmInfo">
+
+                    </div>
+
+                    <h4>Processes</h4>
+
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th id="priorityHeader" style="display: none;">Priority</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="processTable">
+                            <tr>
+                                <td>P1</td>
+
+                                <td>
+                                    <input type="number" class="form-control" name="arrivalTime" min="0" required>
+                                </td>
+
+                                <td>
+                                    <input type="number" class="form-control" name="burstTime" min="1" required>
+                                </td>
+
+                                <td class="priorityCell" style="display: none;">
+                                    <input type="number" class="form-control" name="priority" min="1">
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-danger deleteBtn" type="button">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-success mb-3" type="button" id="addProcessBtn">
+                        Add Process
+                    </button>
+
+                    <div class="mb-3" id="quantumDiv" style="display: none;">
+                        <label class="form-label"> Time Quantum </label>
+
+                        <input class="form-control" type="number" name="timeQuantum" min="0" id="timeQuantum" placeholder="Only for Round Robin">
+                    </div>
+
+                    <div class="text-center">
+
+                        <button class="btn btn-primary" id="solveBtn" type="submit"> Solve </button>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

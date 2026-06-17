@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Result</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="mt-5 text-center">Scheduling Result</h1>
+
+        <div class="card p-4 shadow mt-4">
+
+            <div class="text-end mb-1">
+            
+                <span class="badge bg-primary fs-6 px-3 py-2">
+                    <%= algorithm.toUpperCase() %>
+                </span>
+        
+            </div>
+
+            <h4>Gantt Chart</h4>
+            <div id="ganttChart" class="mb-5 ms-2">
+                <% result.ganttChart.forEach((p,index)=>{ %>
+                    <div class="gantt-block">
+                        <div class="process-name">
+                            <%= p.pid %>
+                        </div>
+                        
+                        <% if(index === 0) {%>
+                            <div class="time-label start">
+                                <%= p.start %>
+                            </div>
+                        <% } %>
+
+                        <div class="time-label end">
+                            <%= p.end %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            
+            <%if(algorithm === "rr" ) {%>
+                <div class="mt-5 mb-3">
+                    <h4>Time Quantum : <small><%= timeQuantum %></small></h4>
+                </div>
+            <% } %>
+
+            <h4>Process Details</h4>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>Arrival Time</th>
+                        <th>Burst Time</th>
+                        <% if(algorithm === 'priority'){ %>
+                            <th>Priority</th>
+                        <% } %>
+                        <th>Completion Time</th>
+                        <th>Turnaround Time</th>
+                        <th>Waiting Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="processDetails">
+                     <% result.processes.forEach((process) => { %>
+                        <tr>
+                            <td><%= process.pid %></td>
+                            <td><%= process.at %></td>
+                            <td><%= process.bt %></td>
+                            <% if(algorithm === 'priority'){ %>
+                                <td> <%= process.priority %></td>
+                            <% } %>
+                            <td><%= process.ct %></td>
+                            <td><%= process.tat %></td>
+                            <td><%= process.wt %></td>
+                        </tr>
+                    <% }); %>
+
+                    <tr>
+                        <td colspan="<%= algorithm === 'priority' ? 5:4 %>">
+                            Average
+                        </td>
+                        <td><%= result.avgTAT %></td>
+                        <td><%= result.avgWT %></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

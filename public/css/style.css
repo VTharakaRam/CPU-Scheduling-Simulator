@@ -1,0 +1,32 @@
+#ganttChart{
+    display: flex;
+    margin-top: 20px;
+}
+
+.gantt-block{
+    position: relative;
+    min-width: 80px;
+    height: 60px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.process-name{
+    font-weight: bold;
+}
+
+.time-label{
+    position: absolute;
+    bottom: -25px;
+    font-size: 14px;
+}
+
+.start{
+    left: -5px;
+}
+
+.end{
+    right: -5px;
+}
